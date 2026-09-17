@@ -1,1762 +1,1128 @@
-\# CodeAlpha Object Detection and Tracking - Real Time
+# CodeAlpha Object Detection and Tracking
 
+## 📌 Project Overview
 
+This project is developed as part of the **CodeAlpha Internship – Object Detection and Tracking Task**.
 
-\## 1. Project Title
+The project implements:
 
+* Object detection in images
+* Object detection in videos
+* Object tracking in videos
+* Real-time object detection and tracking using a laptop webcam
+* Tracking of detected objects using **ByteTrack**
+* Confidence-based detection using a configurable confidence threshold
 
+The project uses the **YOLO11n pretrained model** from Ultralytics for object detection and **OpenCV** for image, video, and webcam processing.
 
-\*\*Object Detection and Tracking using YOLO11 and ByteTrack\*\*
+---
 
-
-
-This project is developed as part of the \*\*CodeAlpha Internship - Object Detection and Tracking Task\*\*.
-
-
-
-\---
-
-
-
-\# 2. Project Overview
-
-
-
-This project is a computer vision application developed using Python, YOLO11, Ultralytics, OpenCV, and ByteTrack.
-
-
-
-The main purpose of this project is to detect objects in images and videos and track detected objects across consecutive video frames.
-
-
-
-The project supports three types of input:
-
-
-
-1\. Multiple images
-
-2\. Multiple video files
-
-3\. Real-time webcam input
-
-
-
-The system performs object detection using the pretrained \*\*YOLO11n\*\* model and object tracking using \*\*ByteTrack\*\*.
-
-
-
-The detected objects are displayed using bounding boxes, object labels, confidence scores, and tracking IDs.
-
-
-
-\---
-
-
-
-\# 3. Project Objectives
-
-
+## 🎯 Objectives
 
 The main objectives of this project are:
 
-
-
-\- To implement object detection using a pretrained YOLO11 model.
-
-\- To process multiple images.
-
-\- To process multiple video files.
-
-\- To detect objects frame by frame in videos.
-
-\- To draw bounding boxes around detected objects.
-
-\- To display object class labels.
-
-\- To display confidence scores.
-
-\- To track objects across consecutive video frames.
-
-\- To assign tracking IDs to detected objects.
-
-\- To implement real-time webcam object detection.
-
-\- To implement real-time webcam object tracking.
-
-\- To save processed images and videos.
-
-\- To demonstrate a complete computer vision pipeline.
-
-
-
-\---
-
-
-
-\# 4. Technologies Used
-
-
-
-| Technology | Purpose |
-
-|------------|---------|
-
-| Python | Main programming language |
-
-| YOLO11 | Object detection |
-
-| YOLO11n | Lightweight pretrained detection model |
-
-| Ultralytics | YOLO11 implementation |
-
-| ByteTrack | Object tracking |
-
-| OpenCV | Image, video, and webcam processing |
-
-| Computer Vision | Object detection and tracking |
-
-| Deep Learning | Object recognition |
-
-
-
-\---
-
-
-
-\# 5. System Requirements
-
-
-
-The project requires:
-
-
-
-\- Windows operating system
-
-\- Python 3.x
-
-\- Webcam for real-time testing
-
-\- Internet connection for installing Python packages and downloading the YOLO model
-
-\- Sufficient storage for Python packages, model files, and output videos
-
-
-
-\---
-
-
-
-\# 6. Project Workflow
-
-
-
-The complete project workflow is:
-
-
-
-```text
-
-Input
-
-&#x20; │
-
-&#x20; ├── Images
-
-&#x20; │
-
-&#x20; ├── Videos
-
-&#x20; │
-
-&#x20; └── Webcam
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;    OpenCV
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;   YOLO11n
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;Object Detection
-
-&#x20;      │
-
-&#x20;      ├── Object Class
-
-&#x20;      ├── Bounding Box
-
-&#x20;      └── Confidence Score
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;   ByteTrack
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;Object Tracking
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;  Tracking IDs
-
-&#x20;      │
-
-&#x20;      ▼
-
-&#x20;Display / Save Results
-
-7\. YOLO11 Model
-
-
-
-This project uses the pretrained:
-
-
-
-YOLO11n
-
-
-
-model.
-
-
-
-YOLO stands for You Only Look Once.
-
-
-
-YOLO is a real-time object detection model that can identify objects in images and video frames.
-
-
-
-The n in YOLO11n means Nano.
-
-
-
-YOLO11n is a lightweight model designed for faster inference and real-time applications.
-
-
-
-The model file used in this project is:
-
-
-
-models/yolo11n.pt
-
-
-
-The model is loaded using:
-
-
-
-from ultralytics import YOLO
-
-
-
-model = YOLO("models/yolo11n.pt")
-
-8\. Initial Project Setup
-
-
-
-The project was created with the following folder:
-
-
-
-CodeAlpha\_ObjectDetectionTracking\_RealTime
-
-
-
-The project contains separate folders for:
-
-
-
-Input images
-
-Input videos
-
-YOLO model
-
-Output files
-
-Virtual environment
-
-9\. Creating the Virtual Environment
-
-
-
-A Python virtual environment is used to keep the project dependencies separate.
-
-
-
-Create the virtual environment using:
-
-
-
-python -m venv venv
-
-
-
-Activate it using Windows PowerShell:
-
-
-
-.\\venv\\Scripts\\Activate.ps1
-
-
-
-After activation, the terminal displays:
-
-
-
-(venv)
-
-10\. Installing Required Libraries
-
-
-
-The main libraries used in this project are:
-
-
-
-ultralytics
-
-opencv-python
-
-
-
-Install them using:
-
-
-
-pip install ultralytics opencv-python
-
-
-
-The dependencies are also stored in:
-
-
-
-requirements.txt
-
-
-
-Install all requirements using:
-
-
-
-pip install -r requirements.txt
-
-11\. YOLO11 Model Testing
-
-
-
-The file:
-
-
-
-test\_yolo.py
-
-
-
-is used to verify that the YOLO11 model loads successfully.
-
-
-
-The code loads:
-
-
-
-models/yolo11n.pt
-
-
-
-Run it using:
-
-
-
-python test\_yolo.py
-
-
-
-Successful output:
-
-
-
-YOLO11 model loaded successfully!
-
-
-
-This confirms that the YOLO11 model is available and can be loaded by the project.
-
-
-
-12\. Image Object Detection
-
-
-
-The file:
-
-
-
-detect\_image.py
-
-
-
-is used for object detection in multiple images.
-
-
-
-Images are placed inside:
-
-
-
-input\_images/
-
-
-
-Supported image formats are:
-
-
-
-.jpg
-
-.jpeg
-
-.png
-
-
-
-The program automatically finds all supported images.
-
-
-
-For every image:
-
-
-
-OpenCV reads the image.
-
-YOLO11 processes the image.
-
-Objects are detected.
-
-Bounding boxes are generated.
-
-Object labels are displayed.
-
-Confidence scores are generated.
-
-The annotated image is saved.
-
-The result is displayed.
-
-13\. Running Image Detection
-
-
-
-Place images inside:
-
-
-
-input\_images/
-
-
-
-Then run:
-
-
-
-python detect\_image.py
-
-
-
-The program processes all images automatically.
-
-
-
-The output is saved inside:
-
-
-
-output/detected\_images/
-
-
-
-Example:
-
-
-
-input\_images/animals.jpg
-
-
-
-becomes:
-
-
-
-output/detected\_images/animals.jpg
-
-14\. Image Detection Testing
-
-
-
-The image detection stage was tested using multiple images.
-
-
-
-Example images included:
-
-
-
-animals.jpg
-
-cars.jpg
-
-people.jpg
-
-test.jpg
-
-
-
-The model detected different objects such as:
-
-
-
-Persons
-
-Cars
-
-Trucks
-
-Bicycles
-
-Dogs
-
-Backpacks
-
-Elephants
-
-Zebras
-
-Giraffes
-
-
-
-The results were successfully saved to the output folder.
-
-
-
-15\. Video Object Detection
-
-
-
-The file:
-
-
-
-detect\_video.py
-
-
-
-is used for object detection in multiple videos.
-
-
-
-Videos are placed inside:
-
-
-
-input\_videos/
-
-
-
-Supported formats are:
-
-
-
-.mp4
-
-.avi
-
-.mov
-
-.mkv
-
-
-
-The program automatically finds all supported videos.
-
-
-
-Each video is processed frame by frame.
-
-
-
-For every frame:
-
-
-
-The frame is read using OpenCV.
-
-YOLO11 detects objects.
-
-Bounding boxes are drawn.
-
-Object labels are displayed.
-
-Confidence scores are displayed.
-
-The processed frame is displayed.
-
-The processed frame is saved into an output video.
-
-16\. Running Video Detection
-
-
-
-Place videos inside:
-
-
-
-input\_videos/
-
-
-
-Then run:
-
-
-
-python detect\_video.py
-
-
-
-The program processes all videos automatically.
-
-
-
-The detection results are saved inside:
-
-
-
-output/detected\_videos/
-
-
-
-Example:
-
-
-
-input\_videos/people.mp4
-
-
-
-produces:
-
-
-
-output/detected\_videos/detected\_people.mp4
-
-17\. Multiple Video Processing
-
-
-
-The project supports multiple videos instead of processing only one video.
-
-
-
-For example:
-
-
-
-input\_videos/
-
-│
-
-├── people.mp4
-
-├── cars.mp4
-
-├── traffic.mp4
-
-└── street.mp4
-
-
-
-The program processes them one after another.
-
-
-
-This makes the project more flexible and demonstrates that the application can handle multiple input videos.
-
-
-
-18\. Object Tracking
-
-
-
-Object detection identifies objects in each frame.
-
-
-
-Object tracking goes one step further by attempting to maintain the identity of an object across consecutive frames.
-
-
+1. Detect objects in images using YOLO11.
+2. Detect objects frame-by-frame in videos.
+3. Track detected objects across consecutive video frames.
+4. Assign tracking IDs to detected objects.
+5. Process multiple images automatically.
+6. Process multiple videos automatically.
+7. Perform real-time object detection and tracking using a webcam.
+8. Save processed detection and tracking results.
+9. Understand the practical workflow of computer vision-based object detection and tracking.
+
+---
+
+# 🧠 Technologies Used
+
+| Technology  | Purpose                             |
+| ----------- | ----------------------------------- |
+| Python      | Main programming language           |
+| YOLO11n     | Object detection                    |
+| Ultralytics | YOLO11 model and tracking interface |
+| ByteTrack   | Multi-object tracking               |
+| OpenCV      | Image, video and webcam processing  |
+| Git         | Version control                     |
+| GitHub      | Source code repository              |
+
+---
+
+# 🤖 YOLO11
+
+**YOLO** stands for **You Only Look Once**.
+
+YOLO is a real-time object detection algorithm that can identify objects in an image or video frame and determine their locations using bounding boxes.
 
 This project uses:
 
+**YOLO11n**
 
+The `n` represents the **nano** version of the YOLO11 model.
 
-ByteTrack
+YOLO11n is a relatively lightweight pretrained model suitable for experimentation and real-time computer vision applications.
 
+The model can detect objects from the classes included in its pretrained dataset.
 
+Examples of objects that can be detected include:
 
-for object tracking.
+* Person
+* Car
+* Bicycle
+* Dog
+* Cat
+* Elephant
+* Giraffe
+* Zebra
+* Truck
+* Backpack
+* And other supported object classes
 
+The pretrained model is used directly in this project; the model is **not trained from scratch**.
 
+---
 
-The tracking system associates detections between frames and assigns tracking IDs.
+# 🎯 Object Detection
 
+Object detection identifies:
 
+1. **What object is present**
+2. **Where the object is located**
+3. **How confident the model is about the detection**
 
-19\. ByteTrack
+For example, a detection may contain information such as:
 
+```text
+person 0.92
+```
 
+This means:
 
-ByteTrack is an object tracking algorithm used to associate detected objects across video frames.
+* `person` → detected object class
+* `0.92` → model confidence of approximately 92%
 
+The result is displayed using a bounding box around the detected object.
 
+---
 
-It works together with the YOLO11 detection results.
+# 🔄 Object Tracking
 
+Object detection identifies objects independently in each frame.
 
+Object tracking goes one step further.
 
-The workflow is:
-
-
-
-Video Frame
-
-&#x20;    ↓
-
-YOLO11 Detection
-
-&#x20;    ↓
-
-Detected Objects
-
-&#x20;    ↓
-
-ByteTrack
-
-&#x20;    ↓
-
-Tracking IDs
-
-20\. Tracking IDs
-
-
-
-A tracking ID is a number assigned to an object being tracked.
-
-
+Tracking attempts to maintain the identity of an object across consecutive video frames.
 
 For example:
 
+```text
+Frame 1 → Person → ID 1
+Frame 2 → Person → ID 1
+Frame 3 → Person → ID 1
+```
 
+The tracking ID helps distinguish different detected objects while they are being tracked.
 
-person 1
+---
 
-person 2
+# 🚀 ByteTrack
 
-car 3
+This project uses **ByteTrack** through the Ultralytics tracking interface.
 
-car 4
+ByteTrack is a multi-object tracking algorithm that associates detections across consecutive video frames.
 
+The tracking process can be summarized as:
 
+```text
+Video Frame
+     ↓
+YOLO11 Object Detection
+     ↓
+Detected Bounding Boxes
+     ↓
+ByteTrack
+     ↓
+Object Association
+     ↓
+Tracking IDs
+     ↓
+Annotated Video
+```
 
-Here:
+### Important
 
+This project uses **ByteTrack**.
 
+It does **not** use Deep SORT.
 
-person
+---
 
+# 📁 Project Structure
 
+```text
+CodeAlpha_ObjectDetectionTracking_RealTime/
+│
+├── input_images/
+│   ├── animals.jpg
+│   ├── cars.jpg
+│   ├── people.jpg
+│   └── test.jpg
+│
+├── input_videos/
+│   ├── cars.mp4
+│   ├── peoples.mp4
+│   ├── street.mp4
+│   └── traffic.mp4
+│
+├── models/
+│   └── yolo11n.pt
+│
+├── output/
+│   ├── detected_images/
+│   ├── detected_videos/
+│   └── tracked_videos/
+│
+├── venv/
+│
+├── test_yolo.py
+├── detect_image.py
+├── detect_video.py
+├── track_video.py
+├── webcam_tracking.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
 
-is the object class.
+### GitHub Note
 
+The following items are intentionally excluded from GitHub using `.gitignore`:
 
+```text
+venv/
+models/*.pt
+output/
+__pycache__/
+*.pyc
+```
 
-The numbers:
+Therefore, the `yolo11n.pt` model file and generated output files are not stored in the GitHub repository.
 
+---
 
+# 💻 System Requirements
 
-1
+Recommended environment:
 
-2
+* Windows 10/11
+* Python 3.11
+* Webcam for real-time testing
+* Internet connection for installing Python packages and downloading the pretrained model
+* Sufficient disk space for Python packages and model files
 
-3
+A dedicated NVIDIA GPU is **not required** for this project.
 
-4
+The project can run using the CPU, although processing speed depends on the computer hardware and video resolution.
 
+---
 
+# ⚙️ Installation and Setup
 
-are tracking IDs.
+## 1. Clone the Repository
 
+Clone the GitHub repository:
 
+```powershell
+git clone https://github.com/savitri2005/CodeAlpha_ObjectDetectionTracking_RealTime.git
+```
 
-The confidence value is separate from the tracking ID.
+Move into the project folder:
 
+```powershell
+cd CodeAlpha_ObjectDetectionTracking_RealTime
+```
 
+---
 
-Example:
+## 2. Create a Virtual Environment
 
+Create a Python virtual environment:
 
+```powershell
+python -m venv venv
+```
 
-person 1 0.92
+---
 
+## 3. Activate the Virtual Environment
 
+For Windows PowerShell:
 
-means:
+```powershell
+.\venv\Scripts\Activate.ps1
+```
 
+After activation, the terminal should show something similar to:
 
+```text
+(venv) PS C:\...\CodeAlpha_ObjectDetectionTracking_RealTime>
+```
 
-person → object class
+---
 
-1 → tracking ID
+## 4. Install Required Libraries
 
-0.92 → confidence score
+Install the required Python packages:
 
+```powershell
+pip install -r requirements.txt
+```
 
+The project requires:
 
-Tracking IDs are automatically generated by ByteTrack.
+```text
+ultralytics
+opencv-python
+```
 
+---
 
+# 📦 Download the YOLO11 Model
 
-21\. Video Object Tracking
+The pretrained YOLO11n model is intentionally excluded from GitHub because model files are ignored by `.gitignore`.
 
+After cloning the repository, make sure the `models` folder exists:
 
+```powershell
+mkdir models
+```
+
+Download the YOLO11n model using Ultralytics:
+
+```powershell
+python -c "from ultralytics import YOLO; YOLO('yolo11n.pt')"
+```
+
+After the download completes, move the model into the project's `models` folder:
+
+```powershell
+Move-Item yolo11n.pt models\yolo11n.pt
+```
+
+The expected location is:
+
+```text
+models/yolo11n.pt
+```
+
+---
+
+# 🧪 Testing the YOLO11 Model
+
+The project contains:
+
+```text
+test_yolo.py
+```
+
+This file verifies that the YOLO11 model can be loaded successfully.
+
+Run:
+
+```powershell
+python test_yolo.py
+```
+
+Expected output:
+
+```text
+YOLO11 model loaded successfully!
+```
+
+---
+
+# 🖼️ Image Object Detection
 
 The file:
 
+```text
+detect_image.py
+```
 
+performs object detection on all supported images inside:
 
-track\_video.py
+```text
+input_images/
+```
 
+Supported image formats:
 
+```text
+.jpg
+.jpeg
+.png
+```
 
-is used for object tracking in multiple videos.
+The program automatically searches for all supported images and processes them one by one.
 
+---
 
+## ▶️ Run Image Detection
+
+Run:
+
+```powershell
+python detect_image.py
+```
 
 The program:
 
+1. Loads YOLO11n.
+2. Searches the `input_images` folder.
+3. Reads each image.
+4. Performs object detection.
+5. Draws bounding boxes and labels.
+6. Displays the result.
+7. Saves the detected image.
 
+Output location:
 
-Reads videos from input\_videos.
+```text
+output/detected_images/
+```
 
-Reads frames using OpenCV.
+---
 
-Detects objects using YOLO11.
+# 🖼️ Image Testing Performed
 
-Uses ByteTrack to track objects.
+The project was tested using the following images:
 
-Assigns tracking IDs.
+```text
+animals.jpg
+cars.jpg
+people.jpg
+test.jpg
+```
 
-Draws bounding boxes.
+Example detections observed during testing included:
 
-Displays labels and IDs.
+### animals.jpg
 
-Saves the tracked video.
+Detected examples:
 
-22\. Running Video Tracking
+* Elephant
+* Zebra
+* Giraffe
 
+### cars.jpg
 
+Detected examples:
 
-Run:
+* Person
+* Cars
+* Trucks
 
+### people.jpg
 
+Detected examples:
 
-python track\_video.py
+* Persons
+* Bicycles
+* Cars
+* Truck
 
+### test.jpg
 
+Detected examples:
 
-The program processes all videos inside:
+* Person
+* Bicycle
+* Car
+* Dog
+* Backpack
 
+Detection results are saved in:
 
+```text
+output/detected_images/
+```
 
-input\_videos/
+---
 
-
-
-The tracked videos are saved inside:
-
-
-
-output/tracked\_videos/
-
-
-
-Example:
-
-
-
-input\_videos/people.mp4
-
-
-
-produces:
-
-
-
-output/tracked\_videos/tracked\_people.mp4
-
-23\. Real-Time Webcam Detection
-
-
-
-The project also supports real-time webcam input.
-
-
-
-The webcam is accessed using:
-
-
-
-cv2.VideoCapture(0)
-
-
-
-The webcam continuously provides frames to the application.
-
-
-
-Each frame is processed by YOLO11.
-
-
-
-24\. Real-Time Webcam Tracking
-
-
+# 🎥 Video Object Detection
 
 The file:
 
+```text
+detect_video.py
+```
 
+performs object detection on videos.
 
-webcam\_tracking.py
+The program automatically searches the:
 
+```text
+input_videos/
+```
 
+folder.
 
-implements real-time object detection and tracking.
+Supported video formats:
 
+```text
+.mp4
+.avi
+.mov
+.mkv
+```
 
+---
 
-The workflow is:
-
-
-
-Webcam
-
-&#x20;  ↓
-
-OpenCV
-
-&#x20;  ↓
-
-YOLO11
-
-&#x20;  ↓
-
-Object Detection
-
-&#x20;  ↓
-
-ByteTrack
-
-&#x20;  ↓
-
-Tracking IDs
-
-&#x20;  ↓
-
-Display
-
-
-
-The webcam application displays:
-
-
-
-Bounding boxes
-
-Object labels
-
-Confidence scores
-
-Tracking IDs
-
-25\. Running Webcam Tracking
-
-
+## ▶️ Run Video Detection
 
 Run:
 
+```powershell
+python detect_video.py
+```
 
+The program:
 
-python webcam\_tracking.py
-
-
-
-The webcam window opens automatically.
-
-
-
-Objects detected by YOLO11 are displayed with bounding boxes and labels.
-
-
-
-ByteTrack assigns tracking IDs to tracked objects.
-
-
+1. Searches for videos.
+2. Opens each video.
+3. Reads the video frame-by-frame.
+4. Runs YOLO11 object detection on each frame.
+5. Draws bounding boxes and labels.
+6. Displays the processed video.
+7. Saves the detected video.
+8. Moves to the next video.
 
 Press:
 
-
-
+```text
 Q
+```
 
+to stop processing the current video.
 
+---
 
-to stop the webcam application.
+# 🎥 Multiple Video Processing
 
+The project supports processing multiple videos automatically.
 
+The current input videos are:
 
-26\. Confidence Threshold
+```text
+cars.mp4
+peoples.mp4
+street.mp4
+traffic.mp4
+```
 
+The detected videos are saved inside:
 
+```text
+output/detected_videos/
+```
 
-The webcam tracking application uses:
+Output files are created using the prefix:
 
-
-
-conf=0.50
-
-
-
-This means detections with confidence below 50% are filtered out.
-
-
-
-The confidence score is different from the tracking ID.
-
-
+```text
+detected_
+```
 
 For example:
 
+```text
+detected_cars.mp4
+detected_peoples.mp4
+detected_street.mp4
+detected_traffic.mp4
+```
 
+---
 
-person 1 0.91
+# 🚗 Object Tracking in Videos
 
+The file:
 
+```text
+track_video.py
+```
 
-means:
+performs object detection and tracking.
 
+It uses:
 
+```text
+YOLO11n + ByteTrack
+```
 
-person = object class
+The tracking process maintains object identities across video frames whenever the tracker can associate the detections.
 
-1 = tracking ID
+---
 
-0.91 = confidence
-
-
-
-The confidence threshold helps reduce very low-confidence detections.
-
-
-
-However, confidence filtering does not guarantee that every predicted object class will always be correct.
-
-
-
-27\. Object Detection Accuracy
-
-
-
-Because this project uses a pretrained general-purpose YOLO11 model, some objects can occasionally be classified incorrectly.
-
-
-
-For example, an actual bottle may sometimes be predicted as another class.
-
-
-
-Possible reasons include:
-
-
-
-Poor lighting
-
-Motion blur
-
-Small objects
-
-Object occlusion
-
-Similar-looking objects
-
-Unusual camera angles
-
-Complex backgrounds
-
-Objects outside the model's trained classes
-
-Limitations of the lightweight YOLO11n model
-
-
-
-This is a limitation of the pretrained detection model and does not necessarily indicate an error in the implementation.
-
-
-
-28\. Tracking Limitations
-
-
-
-Tracking IDs can sometimes change.
-
-
-
-This can happen when:
-
-
-
-An object becomes temporarily hidden.
-
-Two objects overlap.
-
-The object leaves the camera view.
-
-The object re-enters the frame.
-
-The detector temporarily fails to detect the object.
-
-The object moves very quickly.
-
-
-
-These situations can make it difficult for the tracker to maintain the same identity.
-
-
-
-29\. Output Files
-
-
-
-The project creates different types of outputs.
-
-
-
-Detected Images
-
-output/detected\_images/
-
-Detected Videos
-
-output/detected\_videos/
-
-Tracked Videos
-
-output/tracked\_videos/
-
-30\. Complete Project Structure
-
-CodeAlpha\_ObjectDetectionTracking\_RealTime/
-
-│
-
-├── input\_images/
-
-│   ├── animals.jpg
-
-│   ├── cars.jpg
-
-│   ├── people.jpg
-
-│   └── test.jpg
-
-│
-
-├── input\_videos/
-
-│   ├── people.mp4
-
-│   ├── cars.mp4
-
-│   ├── traffic.mp4
-
-│   └── other videos
-
-│
-
-├── models/
-
-│   └── yolo11n.pt
-
-│
-
-├── output/
-
-│   ├── detected\_images/
-
-│   ├── detected\_videos/
-
-│   └── tracked\_videos/
-
-│
-
-├── venv/
-
-│
-
-├── test\_yolo.py
-
-├── detect\_image.py
-
-├── detect\_video.py
-
-├── track\_video.py
-
-├── webcam\_tracking.py
-
-├── requirements.txt
-
-├── .gitignore
-
-└── README.md
-
-31\. Description of Python Files
-
-test\_yolo.py
-
-
-
-Tests whether the YOLO11 model loads successfully.
-
-
-
-detect\_image.py
-
-
-
-Processes multiple images and performs object detection.
-
-
-
-detect\_video.py
-
-
-
-Processes multiple videos and performs object detection frame by frame.
-
-
-
-track\_video.py
-
-
-
-Processes multiple videos and performs object detection and object tracking using ByteTrack.
-
-
-
-webcam\_tracking.py
-
-
-
-Performs real-time webcam object detection and tracking using YOLO11 and ByteTrack.
-
-
-
-32\. Requirements File
-
-
-
-The project contains:
-
-
-
-requirements.txt
-
-
-
-The file contains:
-
-
-
-ultralytics
-
-opencv-python
-
-
-
-Install the requirements using:
-
-
-
-pip install -r requirements.txt
-
-33\. Git Ignore
-
-
-
-The project contains:
-
-
-
-.gitignore
-
-
-
-The following files and folders are ignored:
-
-
-
-venv/
-
-\_\_pycache\_\_/
-
-\*.pyc
-
-models/\*.pt
-
-output/
-
-\*.tmp
-
-\*.log
-
-
-
-The virtual environment and generated output files are not required in the GitHub repository.
-
-
-
-The YOLO model file is also excluded from GitHub because it can be downloaded separately.
-
-
-
-34\. Complete Installation Guide
-
-Step 1: Clone the repository
-
-git clone https://github.com/your-username/CodeAlpha\_ObjectDetectionTracking\_RealTime.git
-
-Step 2: Open the project
-
-cd CodeAlpha\_ObjectDetectionTracking\_RealTime
-
-Step 3: Create virtual environment
-
-python -m venv venv
-
-Step 4: Activate virtual environment
-
-.\\venv\\Scripts\\Activate.ps1
-
-Step 5: Install dependencies
-
-pip install -r requirements.txt
-
-Step 6: Download or place the YOLO11 model
-
-
-
-The project uses:
-
-
-
-models/yolo11n.pt
-
-
-
-The model should be available at this location before running the programs.
-
-
-
-35\. Complete Execution Guide
-
-Test the model
-
-python test\_yolo.py
-
-Detect objects in images
-
-python detect\_image.py
-
-Detect objects in multiple videos
-
-python detect\_video.py
-
-Track objects in multiple videos
-
-python track\_video.py
-
-Run real-time webcam detection and tracking
-
-python webcam\_tracking.py
-
-
-
-Press Q to stop the webcam.
-
-
-
-36\. Testing Performed
-
-
-
-The project was tested using:
-
-
-
-Multiple images
-
-Multiple video files
-
-Real-time webcam input
-
-
-
-The image detection stage successfully processed multiple images.
-
-
-
-The video detection stage successfully processed multiple videos.
-
-
-
-The video tracking stage successfully displayed tracking IDs.
-
-
-
-The webcam stage successfully performed real-time object detection and tracking.
-
-
-
-37\. Example Detection Results
-
-
-
-The system can detect common objects such as:
-
-
-
-Person
-
-Car
-
-Truck
-
-Bicycle
-
-Dog
-
-Backpack
-
-Bottle
-
-Animal classes
-
-
-
-The actual detected classes depend on the pretrained model and the input image or video.
-
-
-
-38\. Example Tracking Result
-
-
-
-An example tracking result can look like:
-
-
-
-person 1
-
-person 2
-
-car 3
-
-car 4
-
-
-
-The IDs allow objects to be distinguished from each other while they are being tracked.
-
-
-
-39\. Performance Information
-
-
-
-During webcam processing, YOLO11 reports processing information such as:
-
-
-
-preprocess
-
-inference
-
-postprocess
-
-
-
-Example:
-
-
-
-Speed: 1.8ms preprocess, 72.9ms inference, 2.0ms postprocess
-
-
-
-These values indicate the approximate processing time for a frame and can vary depending on the computer, input resolution, and system load.
-
-
-
-40\. Project Advantages
-
-
-
-This project demonstrates:
-
-
-
-Real-time computer vision
-
-Object detection
-
-Object tracking
-
-Video processing
-
-Webcam processing
-
-Deep learning model usage
-
-Multiple input processing
-
-Tracking ID generation
-
-Python programming
-
-Practical use of OpenCV
-
-Practical use of YOLO11
-
-Practical use of ByteTrack
-
-41\. Limitations
-
-
-
-The project is based on a pretrained YOLO11n model.
-
-
-
-Therefore:
-
-
-
-Detection is not guaranteed to be perfect.
-
-Some objects can be incorrectly classified.
-
-Tracking IDs can occasionally change.
-
-Very small objects may be difficult to detect.
-
-Poor lighting can affect detection.
-
-Occluded objects may be missed.
-
-Fast-moving objects may be difficult to track.
-
-Webcam performance depends on hardware.
-
-
-
-The project is intended as an educational and internship implementation demonstrating object detection and tracking.
-
-
-
-42\. Future Improvements
-
-
-
-Possible future improvements include:
-
-
-
-Training YOLO on a custom dataset.
-
-Using a larger YOLO11 model.
-
-Improving object detection accuracy.
-
-Adding more tracking algorithms.
-
-Adding object counting.
-
-Adding line-crossing detection.
-
-Adding region-based counting.
-
-Adding alert systems.
-
-Adding a graphical user interface.
-
-Adding performance monitoring.
-
-Supporting additional input sources.
-
-Improving tracking stability.
-
-43\. CodeAlpha Internship Task
-
-
-
-Organization: CodeAlpha
-
-
-
-Internship Task: Object Detection and Tracking
-
-
-
-Project: Real-Time Object Detection and Tracking
-
-
-
-The project demonstrates the practical implementation of computer vision using a pretrained YOLO11 model, OpenCV, and ByteTrack.
-
-
-
-44\. Author
-
-
-
-Savitri Kullolli
-
-
-
-Bachelor of Engineering
-
-Artificial Intelligence \& Machine Learning
-
-
-
-45\. Conclusion
-
-
-
-This project implements a complete object detection and tracking system.
-
-
-
-The project starts with input images, videos, or webcam frames.
-
-
-
-OpenCV is used to capture and process the input.
-
-
-
-YOLO11 is used to detect objects.
-
-
-
-ByteTrack is used to track detected objects across video frames.
-
-
-
-The system displays:
-
-
-
-Bounding boxes
-
-Object labels
-
-Confidence scores
-
-Tracking IDs
-
-
-
-The project supports:
-
-
-
-Multiple Image Detection
-
-&#x20;       ↓
-
-Multiple Video Detection
-
-&#x20;       ↓
-
-Multiple Video Tracking
-
-&#x20;       ↓
-
-Real-Time Webcam Detection
-
-&#x20;       ↓
-
-Real-Time Webcam Tracking
-
-
-
-This project demonstrates the practical application of Deep Learning, Computer Vision, Object Detection, and Object Tracking using Python.
-
-
-
-46\. License
-
-
-
-This project is developed for educational and internship purposes.
-
-
-
-
-
-\### Now save this as the \*\*only README file\*\*
-
-
+## ▶️ Run Video Tracking
 
 Run:
 
+```powershell
+python track_video.py
+```
 
+The program:
+
+1. Opens each input video.
+2. Reads frames continuously.
+3. Performs YOLO11 object detection.
+4. Passes detections to ByteTrack.
+5. Associates objects across frames.
+6. Assigns tracking IDs.
+7. Draws bounding boxes, labels and IDs.
+8. Displays the tracking result.
+9. Saves the processed video.
+
+Press:
+
+```text
+Q
+```
+
+to stop processing the current video.
+
+---
+
+# 🆔 Understanding Tracking Labels
+
+A tracking result may display information similar to:
+
+```text
+person 1 0.92
+```
+
+These values represent different things:
+
+```text
+person → Object class
+1      → Tracking ID
+0.92   → Detection confidence
+```
+
+### Object Class
+
+The object class tells what the model believes the object is.
+
+### Tracking ID
+
+The tracking ID identifies an object being tracked across frames.
+
+### Confidence
+
+The confidence value indicates the model's confidence in its detected class.
+
+These three values should not be confused with each other.
+
+---
+
+# 📹 Tracking Output
+
+Tracked videos are saved in:
+
+```text
+output/tracked_videos/
+```
+
+The output filename uses:
+
+```text
+tracked_
+```
+
+For example:
+
+```text
+tracked_cars.mp4
+tracked_peoples.mp4
+tracked_street.mp4
+tracked_traffic.mp4
+```
+
+---
+
+# 📷 Real-Time Webcam Object Detection and Tracking
+
+The file:
+
+```text
+webcam_tracking.py
+```
+
+provides real-time object detection and tracking using the laptop webcam.
+
+The webcam is accessed using:
+
+```python
+cv2.VideoCapture(0)
+```
+
+The processing pipeline is:
+
+```text
+Laptop Webcam
+      ↓
+OpenCV
+      ↓
+Video Frame
+      ↓
+YOLO11 Object Detection
+      ↓
+ByteTrack
+      ↓
+Tracking IDs
+      ↓
+Bounding Boxes + Labels
+      ↓
+Live Display
+```
+
+---
+
+# ▶️ Run Real-Time Webcam Tracking
+
+Make sure your webcam is available.
+
+Run:
 
 ```powershell
+python webcam_tracking.py
+```
 
-notepad README.md
+The webcam window will open.
 
+The application performs:
+
+* Real-time object detection
+* Object tracking
+* Bounding-box drawing
+* Class labeling
+* Tracking ID assignment
+* Confidence filtering
+
+Press:
+
+```text
+Q
+```
+
+to stop the webcam application.
+
+---
+
+# 🎚️ Confidence Threshold
+
+The webcam tracking implementation uses:
+
+```python
+conf=0.50
+```
+
+This means detections below the configured confidence threshold are filtered out by the detection/tracking pipeline.
+
+The current threshold is:
+
+```text
+50%
+```
+
+A confidence threshold can reduce low-confidence detections, but it does **not guarantee that every object will be classified correctly**.
+
+---
+
+# ⚠️ Object Detection Accuracy
+
+This project uses a pretrained general-purpose YOLO11n model.
+
+Because the model is not specifically trained on the user's own objects or environment, incorrect classifications can sometimes occur.
+
+For example, an object may occasionally be assigned an incorrect class.
+
+This can happen because of factors such as:
+
+* Object appearance
+* Lighting conditions
+* Camera angle
+* Object size
+* Background
+* Occlusion
+* Similar-looking objects
+* Training data limitations
+* Model size
+
+Therefore, the output of a pretrained object detector should be interpreted as a model prediction rather than a guaranteed identification.
+
+---
+
+# 🔄 Tracking Limitations
+
+Tracking IDs are generated by the tracking algorithm and may change in some situations.
+
+For example, an ID can change when:
+
+* An object becomes temporarily hidden.
+* Objects overlap.
+* An object leaves the frame and later returns.
+* The detector temporarily fails to detect the object.
+* The object moves quickly.
+* Lighting or image quality changes.
+
+Therefore, a tracking ID represents the track maintained by the tracker rather than a permanent real-world identity.
+
+---
+
+# 📊 Project Workflow
+
+The complete workflow of this project is:
+
+```text
+                 Input
+                   │
+        ┌──────────┼──────────┐
+        │          │          │
+      Images     Videos     Webcam
+        │          │          │
+        ↓          ↓          ↓
+     YOLO11     YOLO11      YOLO11
+        │          │          │
+        ↓          ↓          ↓
+    Detection   Detection   Detection
+                   │          │
+                   ↓          ↓
+               ByteTrack   ByteTrack
+                   │          │
+                   ↓          ↓
+                Tracking    Tracking
+                   │          │
+                   └────┬─────┘
+                        ↓
+                 Annotated Output
+```
+
+---
+
+# 📂 Output Structure
+
+The program creates output folders automatically.
+
+```text
+output/
+│
+├── detected_images/
+│
+├── detected_videos/
+│
+└── tracked_videos/
+```
+
+### Detected Images
+
+Stored in:
+
+```text
+output/detected_images/
+```
+
+### Detected Videos
+
+Stored in:
+
+```text
+output/detected_videos/
+```
+
+### Tracked Videos
+
+Stored in:
+
+```text
+output/tracked_videos/
+```
+
+---
+
+# 📝 Python Files
+
+## `test_yolo.py`
+
+Checks whether the YOLO11n model can be loaded successfully.
+
+---
+
+## `detect_image.py`
+
+Performs object detection on all supported images in the `input_images` folder.
+
+---
+
+## `detect_video.py`
+
+Performs object detection on all supported videos in the `input_videos` folder.
+
+---
+
+## `track_video.py`
+
+Performs object detection and multi-object tracking on all supported videos using YOLO11n and ByteTrack.
+
+---
+
+## `webcam_tracking.py`
+
+Performs real-time object detection and tracking using the laptop webcam.
+
+---
+
+# 📋 requirements.txt
+
+The project uses the following main dependencies:
+
+```text
+ultralytics
+opencv-python
+```
+
+Install them using:
+
+```powershell
+pip install -r requirements.txt
+```
+
+---
+
+# 🚫 .gitignore
+
+The `.gitignore` file prevents unnecessary or large files from being uploaded to GitHub.
+
+Current ignored items include:
+
+```text
+venv/
+__pycache__/
+*.pyc
+models/*.pt
+output/
+*.tmp
+*.log
+```
+
+This keeps the GitHub repository smaller and avoids uploading the virtual environment, model weights and generated output files.
+
+---
+
+# 🔧 Complete Execution Guide
+
+After cloning and installing the project, use the following sequence.
+
+### Step 1 — Activate environment
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+### Step 2 — Verify the model
+
+```powershell
+python test_yolo.py
+```
+
+### Step 3 — Run image detection
+
+```powershell
+python detect_image.py
+```
+
+### Step 4 — Run video detection
+
+```powershell
+python detect_video.py
+```
+
+### Step 5 — Run video tracking
+
+```powershell
+python track_video.py
+```
+
+### Step 6 — Run real-time webcam tracking
+
+```powershell
+python webcam_tracking.py
+```
+
+Press `Q` when you want to stop the active video or webcam window.
+
+---
+
+# 🧪 Testing Performed
+
+The project was tested using:
+
+### Images
+
+```text
+animals.jpg
+cars.jpg
+people.jpg
+test.jpg
+```
+
+### Videos
+
+```text
+cars.mp4
+peoples.mp4
+street.mp4
+traffic.mp4
+```
+
+### Webcam
+
+The real-time tracking application was tested using the laptop webcam.
+
+The webcam application successfully performed real-time inference and displayed detection and tracking results.
+
+---
+
+# ⚡ Performance
+
+The project was tested on a Windows laptop using CPU-based processing.
+
+Example YOLO11 inference output during webcam testing was approximately:
+
+```text
+Preprocess: 1.8 ms
+Inference: 72.9 ms
+Postprocess: 2.0 ms
+```
+
+Actual performance can vary depending on:
+
+* CPU
+* RAM
+* Video resolution
+* Number of detected objects
+* Lighting
+* Input image size
+* Background complexity
+
+---
+
+# ✅ Advantages
+
+* Uses a pretrained YOLO11 model.
+* Supports image object detection.
+* Supports multiple video files.
+* Supports multi-object tracking.
+* Uses ByteTrack for tracking.
+* Supports real-time webcam processing.
+* Automatically creates output folders.
+* Uses a simple Python-based implementation.
+* Can be extended for more advanced computer vision applications.
+
+---
+
+# ⚠️ Limitations
+
+* The pretrained YOLO11n model may occasionally misclassify objects.
+* Detection accuracy depends on the pretrained model and input conditions.
+* Tracking IDs are not guaranteed to remain permanent.
+* CPU processing can be slower than GPU processing.
+* The project does not train a custom object detection model.
+* The project is intended as an internship-level computer vision implementation rather than a production surveillance system.
+* Real-time performance depends on the computer hardware and camera resolution.
+
+---
+
+# 🚀 Future Improvements
+
+Possible future improvements include:
+
+* Training a custom YOLO model on a domain-specific dataset.
+* Using a more powerful YOLO model when hardware permits.
+* Improving detection accuracy for specific objects.
+* Adding a graphical user interface.
+* Adding object counting.
+* Adding line-crossing detection.
+* Adding region-of-interest detection.
+* Adding real-time statistics.
+* Adding detection logs.
+* Adding configurable confidence thresholds.
+* Adding support for additional camera sources.
+* Deploying the system as a web application.
+
+---
+
+# 🎓 CodeAlpha Internship
+
+This project was developed as part of the **CodeAlpha Artificial Intelligence / Machine Learning Internship**.
+
+### Task
+
+**Object Detection and Tracking**
+
+### Main Implementation
+
+```text
+YOLO11n
+   +
+OpenCV
+   +
+ByteTrack
+```
+
+The project demonstrates practical implementation of object detection, video processing, multi-object tracking and real-time webcam processing.
+
+---
+
+# 🌐 GitHub Repository
+
+Source code:
+
+https://github.com/savitri2005/CodeAlpha_ObjectDetectionTracking_RealTime
+
+---
+
+# 👩‍💻 Author
+
+**Savitri Kullolli**
+
+AI & Machine Learning Student
+
+---
+
+# 📌 Conclusion
+
+This project demonstrates an end-to-end object detection and tracking workflow using a pretrained YOLO11n model.
+
+The system can:
+
+```text
+Detect objects in images
+        ↓
+Detect objects in videos
+        ↓
+Track objects across video frames
+        ↓
+Assign tracking IDs
+        ↓
+Process multiple videos
+        ↓
+Perform real-time webcam detection and tracking
+```
+
+The project provides practical experience with **computer vision, object detection, video processing, multi-object tracking and real-time AI applications**.
+
+---
+
+## 📄 License
+
+This project was created for educational and internship purposes.
